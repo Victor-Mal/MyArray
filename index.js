@@ -96,9 +96,15 @@ class MyArray {
     slice() {
         const newArraySlice = new MyArray();
         let ind = 0;
+        if (arguments[0] < 0) {
+            arguments[0] = (this.length + arguments[0]);
+        }
+        if (arguments[1] === undefined) {
+            arguments[1] = this.length;
+        }
         
         for (let i = 0; i < this.length; i++) {
-
+            
             if ((i >= arguments[0]) && (i < arguments[1])) {
                 newArraySlice[ind] = this.array[i]
                 ind += 1;
@@ -134,14 +140,64 @@ class MyArray {
         return false; 
     }
 
-    find() {
+    find(callbackfn) {
+        if (typeof callbackfn !== "function") {
+            throw new TypeError(callbackfn + " is not a function");
+        }
 
+        for (let index = 0; index < this.length; index++) {
+            const element = this.array[index];
 
-        
+            const result = callbackfn(element, index, this.array);
+            
+            if (result === true) {
+                return element;
+            }  
+        }
+        return undefined;
     }
 
+    findIndex(callbackfn) {
+        if (typeof callbackfn !== "function") {
+            throw new TypeError(callbackfn + " is not a function");
+        }
 
+        for (let index = 0; index < this.length; index++) {
+            const element = this.array[index];
 
+            const result = callbackfn(element, index, this.array);
+            
+            if (result === true) {
+                return this.array[index];
+            } 
+        }
+        return -1;
+    }
+
+    splice() {
+        const newArraySplice = new MyArray();
+        let ind = 0;
+        if (arguments[0] < 0) {
+            arguments[0] = (this.length + arguments[0]);
+        }
+        if (arguments[1] === undefined) {
+            arguments[1] = this.length;
+        }
+        
+        for (let i = 0; i < this.length; i++) {
+            
+            if ((i >= arguments[0]) && (i < arguments[1])) {
+                newArraySplice[ind] = this.array[i]
+                ind += 1;
+                length += 1;
+                
+            }
+            
+        } 
+        
+       
+        return newArraySplice;
+    }
 
 }
 
@@ -154,9 +210,18 @@ console.log(myarray);
 //console.log(myarray.includes(5));
 //console.log(myarray.push(6, 7, 8, 9, 10));
 //console.log(myarray.pop());
-////////console.log(myarray.slice(1, 4));
+///////console.log(myarray.slice(-1));
+//********************************************************** */
 //console.log(myarray.indexOf(2, ));
-console.log(myarray.find());
+//console.log(myarray.find(currentValue => currentValue > 3));
+//console.log(myarray.findIndex(currentValue => currentValue > 4));
+//********************************************************** */
+console.log(myarray.splice(2, 0, 'drum'));
 
 
-
+a = ['* angel', '** clown', '*** mandarin', '**** sturgeon']
+//b = [1, 2, 3, 4, 5]
+c = a.splice(2, 0, 'drum');
+//console.log('Пример', a);
+console.log('Пример', a);
+console.log('Пример', c);
