@@ -67,8 +67,8 @@ class MyArray {
         return newArray;
     }
 
-    includes(searchValue) {
-        for (let index = 0; index < this.length; index++) {
+    includes(searchValue, startIndex = 0) {
+        for (let index = startIndex; index < this.length; index++) {
             if (searchValue === this.array[index]) {
                 return true;
             }
@@ -81,8 +81,10 @@ class MyArray {
     push() {
         for (let i = 0; i < arguments.length; i++) {
             this.array[this.length + i] = arguments[i];
+            
         }
-        return this.array;
+        this.length += arguments.length
+        return this.length;
     } 
 
     pop() {
@@ -174,7 +176,7 @@ class MyArray {
         return -1;
     }
 
-    splice() {
+   /*  splice() {
         const newArraySplice = new MyArray();
         let ind = 0;
         if (arguments[0] < 0) {
@@ -197,31 +199,33 @@ class MyArray {
         
        
         return newArraySplice;
-    }
+    } */
 
 }
 
-const myarray = new MyArray(1, 2, 3, 4, 5);
+const myarray = new MyArray('* anegl', '** clown', '*** mandarin', '**** sturgeon');
 console.log(myarray);
 //console.log(myarray.shift());
 //console.log(myarray.unshift(0));
 //console.log(myarray.forEach(alert));
 //console.log(myarray.map());
-//console.log(myarray.includes(5));
+//console.log(myarray.includes(3, 2));
 //console.log(myarray.push(6, 7, 8, 9, 10));
 //console.log(myarray.pop());
-///////console.log(myarray.slice(-1));
+console.log(myarray.slice(2));
 //********************************************************** */
 //console.log(myarray.indexOf(2, ));
 //console.log(myarray.find(currentValue => currentValue > 3));
 //console.log(myarray.findIndex(currentValue => currentValue > 4));
 //********************************************************** */
-console.log(myarray.splice(2, 0, 'drum'));
+//console.log(myarray.splice(2, 0, 'drum'));
 
 
-a = ['* angel', '** clown', '*** mandarin', '**** sturgeon']
+a = ['* anegl', '** clown', '*** mandarin', '**** sturgeon']
+z = a.slice(0, -1);
+
 //b = [1, 2, 3, 4, 5]
-c = a.splice(2, 0, 'drum');
+//c = a.splice(2, 1, 'drum');
 //console.log('Пример', a);
 console.log('Пример', a);
-console.log('Пример', c);
+console.log('Пример', z);
