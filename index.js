@@ -97,6 +97,9 @@ class MyArray {
     
     slice(begin = 0, end = this.length) {
         const newArraySlice = new MyArray();
+        if (typeof(begin) !== 'number' || isNaN(begin)) {
+            begin = 0;
+        }
         if (begin < 0) {
             begin = (this.length + begin);
         }
@@ -106,7 +109,7 @@ class MyArray {
         for (let i = 0; i < this.length; i++) {
             
             if ((i >= begin) && (i < end)) {
-                newArraySlice.push(this.array[i])
+                newArraySlice.push(this.array[i]);
             }
         } 
         return newArraySlice;
@@ -214,7 +217,8 @@ console.log(myarray);
 
 
 a = ['* anegl', '** clown', '*** mandarin', '**** sturgeon']
-z = a.slice(2, -1);
+z = a.slice(2, NaN);
+
 
 //b = [1, 2, 3, 4, 5]
 //c = a.splice(2, 1, 'drum');
