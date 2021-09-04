@@ -224,10 +224,11 @@ console.log(myarray);
 //********************************************************** */
 /////console.log(myarray.splice(2, 2, 'drum'));
 //console.log(myarray.filter(currentValue => currentValue > 3));
-console.log(myarray.sort());
+//console.log(myarray.sort());
 
 //a = ['* anegl', '** clown', '*** mandarin', '**** sturgeon']
-a = [1, 2, 3, 4, 5]
+a = [ 4, 5, 1, 2, 3]
+console.log(a);
 z = a.sort();
 
 
