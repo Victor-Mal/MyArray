@@ -124,17 +124,12 @@ class MyArray {
         if (fromIndex < 0) {
             fromIndex = (this.length + fromIndex);
         }
-        
-        if ((fromIndex >= this.length) || (searchElement <= fromIndex)) {
-            return -1;
-        }
-       
         for (let index = fromIndex; index < this.length; index++) {
             if (searchElement === this.array[index]) {
                 return index;
             }
         }
-        return false; 
+        return -1; 
     }
 
     find(callbackfn) {
@@ -165,40 +160,54 @@ class MyArray {
             const result = callbackfn(element, index, this.array);
             
             if (result === true) {
-                return this.array[index];
+                return index;
             } 
         }
         return -1;
     }
 
-   /*  splice() {
+    /* splice(beginSplice = 0,  removeValues = 0, insertedElements) {
         const newArraySplice = new MyArray();
-        let ind = 0;
-        if (arguments[0] < 0) {
-            arguments[0] = (this.length + arguments[0]);
+        if (typeof(beginSplice) !== 'number' || isNaN(beginSplice)) {
+            beginSplice = 0;
         }
-        if (arguments[1] === undefined) {
-            arguments[1] = this.length;
+        if (beginSplice < 0) {
+            beginSplice = (this.length + beginSplice);
         }
         
-        for (let i = 0; i < this.length; i++) {
+        const deleteValues = beginSplice + removeValues;
+
+        for (let i = beginSplice; i < deleteValues; i++) {
             
-            if ((i >= arguments[0]) && (i < arguments[1])) {
-                newArraySplice[ind] = this.array[i]
-                ind += 1;
-                length += 1;
-                
-            }
-            
+            newArraySplice.push(this.array[i]);
+            delete this.array[i];
+             
         } 
-        
        
         return newArraySplice;
     } */
 
+    filter(callbackfn) {
+        const newArrayFilter = new MyArray();
+        if (typeof callbackfn !== "function") {
+            throw new TypeError(callbackfn + " is not a function");
+        }
+        for (let index = 0; index < this.length; index++) {
+            const element = this.array[index];
+            const result = callbackfn(element, index, this.array);
+            if (result === true) {
+                
+                newArrayFilter.push(this.array[index]);
+                
+            }    
+        }
+        return newArrayFilter;
+    }
+
+
 }
 
-const myarray = new MyArray('* anegl', '** clown', '*** mandarin', '**** sturgeon');
+const myarray = new MyArray(1, 2, 3, 4, 5);
 console.log(myarray);
 //console.log(myarray.shift());
 //console.log(myarray.unshift(0));
@@ -209,19 +218,21 @@ console.log(myarray);
 //console.log(myarray.pop());
 //console.log(myarray.slice(2, -1));
 //********************************************************** */
-//console.log(myarray.indexOf(2, ));
+//console.log(myarray.indexOf(4, 2));
 //console.log(myarray.find(currentValue => currentValue > 3));
-//console.log(myarray.findIndex(currentValue => currentValue > 4));
+//console.log(myarray.findIndex(currentValue => currentValue > 2));
 //********************************************************** */
-//console.log(myarray.splice(2, 0, 'drum'));
+/////console.log(myarray.splice(2, 2, 'drum'));
+//console.log(myarray.filter(currentValue => currentValue > 3));
+console.log(myarray.sort());
 
-
-a = ['* anegl', '** clown', '*** mandarin', '**** sturgeon']
-z = a.slice(2, NaN);
+//a = ['* anegl', '** clown', '*** mandarin', '**** sturgeon']
+a = [1, 2, 3, 4, 5]
+z = a.sort();
 
 
 //b = [1, 2, 3, 4, 5]
-//c = a.splice(2, 1, 'drum');
+//c = a.splice(2, 2, 'drum');
 //console.log('Пример', a);
 console.log('Пример', a);
 console.log('Пример', z);
