@@ -95,28 +95,20 @@ class MyArray {
         return last;
     }
     
-    slice() {
+    slice(begin = 0, end = this.length) {
         const newArraySlice = new MyArray();
-        let ind = 0;
-        if (arguments[0] < 0) {
-            arguments[0] = (this.length + arguments[0]);
+        if (begin < 0) {
+            begin = (this.length + begin);
         }
-        if (arguments[1] === undefined) {
-            arguments[1] = this.length;
+        if (end < 0) {
+            end = (this.length + end);
         }
-        
         for (let i = 0; i < this.length; i++) {
             
-            if ((i >= arguments[0]) && (i < arguments[1])) {
-                newArraySlice[ind] = this.array[i]
-                ind += 1;
-                length += 1;
-                
+            if ((i >= begin) && (i < end)) {
+                newArraySlice.push(this.array[i])
             }
-            
         } 
-        
-       
         return newArraySlice;
     }
 
@@ -212,7 +204,7 @@ console.log(myarray);
 //console.log(myarray.includes(3, 2));
 //console.log(myarray.push(6, 7, 8, 9, 10));
 //console.log(myarray.pop());
-console.log(myarray.slice(2));
+//console.log(myarray.slice(2, -1));
 //********************************************************** */
 //console.log(myarray.indexOf(2, ));
 //console.log(myarray.find(currentValue => currentValue > 3));
@@ -222,7 +214,7 @@ console.log(myarray.slice(2));
 
 
 a = ['* anegl', '** clown', '*** mandarin', '**** sturgeon']
-z = a.slice(0, -1);
+z = a.slice(2, -1);
 
 //b = [1, 2, 3, 4, 5]
 //c = a.splice(2, 1, 'drum');
