@@ -165,8 +165,9 @@ class MyArray {
         }
         return -1;
     }
-
-    /* splice(beginSplice = 0,  removeValues = 0, insertedElements) {
+    //splice в большинстве случаев работает корректно, кроме случаев
+    //когда removeValues = 0
+    splice(beginSplice = 0,  removeValues = 0, ...insertedElements) {
         const newArraySplice = new MyArray();
         if (typeof(beginSplice) !== 'number' || isNaN(beginSplice)) {
             beginSplice = 0;
@@ -174,18 +175,44 @@ class MyArray {
         if (beginSplice < 0) {
             beginSplice = (this.length + beginSplice);
         }
+        if (removeValues < 0) {
+            removeValues = 0;
+        }
         
-        const deleteValues = beginSplice + removeValues;
-
+        let deleteValues = beginSplice + removeValues;
+        const lengthChangedElements = insertedElements.length + beginSplice;
+        const addLength = insertedElements.length - removeValues;
+        let indexElements = 0;
+        
+        if(deleteValues > this.length){
+            deleteValues = this.length;
+        }
+        
         for (let i = beginSplice; i < deleteValues; i++) {
             
             newArraySplice.push(this.array[i]);
+            
             delete this.array[i];
-             
+            
         } 
-       
+        if (addLength >= 0) {
+            for (let ind = this.length; ind > 0; ind--) {
+              
+                //console.log(this.array[ind]);
+                //console.log('  ',addLength);
+                //console.log('    ', this.array[ind + addLength -1]);
+                //console.log('     ', this.array[ind - 1]);
+                this.array[ind + addLength -1] = this.array[ind - 1];
+            }
+        }
+        
+        for (let index = beginSplice; index < lengthChangedElements; index++) {
+            this.array[index] = insertedElements[indexElements];
+            indexElements++;
+        }
+        this.length = this.length - newArraySplice.length + insertedElements.length;
         return newArraySplice;
-    } */
+    } 
 
     filter(callbackfn) {
         const newArrayFilter = new MyArray();
@@ -222,18 +249,7 @@ console.log(myarray);
 //console.log(myarray.find(currentValue => currentValue > 3));
 //console.log(myarray.findIndex(currentValue => currentValue > 2));
 //********************************************************** */
-/////console.log(myarray.splice(2, 2, 'drum'));
+console.log(myarray.splice(2, 0, 'drum'/* , '* anegl', '** clown', '*** mandarin', '**** sturgeon' */));
 //console.log(myarray.filter(currentValue => currentValue > 3));
 //console.log(myarray.sort());
 
-//a = ['* anegl', '** clown', '*** mandarin', '**** sturgeon']
-a = [ 4, 5, 1, 2, 3]
-console.log(a);
-z = a.sort();
-
-
-//b = [1, 2, 3, 4, 5]
-//c = a.splice(2, 2, 'drum');
-//console.log('Пример', a);
-console.log('Пример', a);
-console.log('Пример', z);
