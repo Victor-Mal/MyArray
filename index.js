@@ -200,7 +200,6 @@ class MyArray {
         if(deleteValues > this.length){
             deleteValues = this.length;
         }
-        
         for (let i = beginSplice; i < deleteValues; i++) {
             
             newArraySplice.push(this.array[i]);
@@ -210,19 +209,14 @@ class MyArray {
         } 
         if (addLength >= 0) {
             for (let ind = this.length; ind > 0; ind--) {
-              
-                //console.log(this.array[ind]);
-                //console.log('  ',addLength);
-                //console.log('    ', this.array[ind + addLength -1]);
-                //console.log('     ', this.array[ind - 1]);
                 this.array[ind + addLength -1] = this.array[ind - 1];
             }
         }
-        
         for (let index = beginSplice; index < lengthChangedElements; index++) {
             this.array[index] = insertedElements[indexElements];
             indexElements++;
         }
+
         this.length = this.length - newArraySplice.length + insertedElements.length;
         return newArraySplice;
     } 
