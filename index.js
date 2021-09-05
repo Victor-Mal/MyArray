@@ -7,6 +7,7 @@ class MyArray {
         this.length = arguments.length;
     }
 
+
     shift() {  
         
         const first = this.array[0];
@@ -21,6 +22,8 @@ class MyArray {
         return first;  
         
     }
+
+
     unshift() {
         
         for (let i = this.length; i > 0; i--) {
@@ -33,6 +36,8 @@ class MyArray {
         
         return this.length
     }
+
+
     /**
     *
     * @param {Function} callbackfn Callback function to call for each cell
@@ -48,6 +53,7 @@ class MyArray {
             }
         }
     }
+
 
     map(callbackfn) {
         if (typeof callbackfn !== "function") {
@@ -67,6 +73,7 @@ class MyArray {
         return newArray;
     }
 
+
     includes(searchValue, startIndex = 0) {
         for (let index = startIndex; index < this.length; index++) {
             if (searchValue === this.array[index]) {
@@ -76,7 +83,6 @@ class MyArray {
         return false;
     }
 
-   
 
     push() {
         for (let i = 0; i < arguments.length; i++) {
@@ -87,6 +93,7 @@ class MyArray {
         return this.length;
     } 
 
+
     pop() {
         const last = this.array[this.length - 1];
         delete this.array[this.length - 1];
@@ -95,6 +102,7 @@ class MyArray {
         return last;
     }
     
+
     slice(begin = 0, end = this.length) {
         const newArraySlice = new MyArray();
         if (typeof(begin) !== 'number' || isNaN(begin)) {
@@ -115,6 +123,7 @@ class MyArray {
         return newArraySlice;
     }
 
+
     indexOf(searchElement, fromIndex) {
         
         if (typeof(fromIndex) === "undefined") {
@@ -131,6 +140,7 @@ class MyArray {
         }
         return -1; 
     }
+
 
     find(callbackfn) {
         if (typeof callbackfn !== "function") {
@@ -149,6 +159,7 @@ class MyArray {
         return undefined;
     }
 
+
     findIndex(callbackfn) {
         if (typeof callbackfn !== "function") {
             throw new TypeError(callbackfn + " is not a function");
@@ -165,6 +176,8 @@ class MyArray {
         }
         return -1;
     }
+
+
     //splice в большинстве случаев работает корректно, кроме случаев
     //когда removeValues = 0
     splice(beginSplice = 0,  removeValues = 0, ...insertedElements) {
@@ -214,6 +227,7 @@ class MyArray {
         return newArraySplice;
     } 
 
+
     filter(callbackfn) {
         const newArrayFilter = new MyArray();
         if (typeof callbackfn !== "function") {
@@ -249,7 +263,7 @@ console.log(myarray);
 //console.log(myarray.find(currentValue => currentValue > 3));
 //console.log(myarray.findIndex(currentValue => currentValue > 2));
 //********************************************************** */
-console.log(myarray.splice(2, 0, 'drum'/* , '* anegl', '** clown', '*** mandarin', '**** sturgeon' */));
+//console.log(myarray.splice(2, 0, 'drum'/* , '* anegl', '** clown', '*** mandarin', '**** sturgeon' */));
 //console.log(myarray.filter(currentValue => currentValue > 3));
 //console.log(myarray.sort());
 
